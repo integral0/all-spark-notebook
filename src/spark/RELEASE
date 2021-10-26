@@ -1,0 +1,2 @@
+Spark 2.4.0-cdh6.3.2 built for Hadoop 3.0.0-cdh6.3.2
+Build flags: -Dcdh.build=true -T 1.5C -Divy.home=/var/lib/jenkins/.ivy2 -Dsbt.ivy.home=/var/lib/jenkins/.ivy2 -Duser.home=/var/lib/jenkins -Drepo.maven.org=http://maven.jenkins.cloudera.com:8081/artifactory/cloudera-mirrors/ -Dreactor.repo=file:///var/lib/jenkins/.m2/repository-local-spark -DskipTests -DrecompileMode=all
