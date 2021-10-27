@@ -1,11 +1,14 @@
-# FROM registry.gitlab.com/gitlab-org/jupyterhub-user-image:latest
-FROM jupyter/all-spark-notebook:ubuntu-20.04
+ARG OWNER=integal79
+ARG BASE_CONTAINER=$OWNER/all-spark-notebook
+FROM $BASE_CONTAINER
 
-ARG NB_USER=jovyan
-ARG NB_UID=1000
-ARG HOME=/home/jovyan
+LABEL maintainer="Evgeny Sorokin <e.sorokin@southbridge.com>"
 
 USER root
+
+# RSpark config
+ENV R_LIBS_USER "${SPARK_HOME}/R/lib"
+RUN fix-permissions "${R_LIBS_USER}"
 
 RUN apt-get update && apt-get install -y \
     openjdk-8-jdk \
@@ -13,8 +16,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/cloudera/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554/lib && chown ${NB_USER} -R /opt/cloudera/
-
-RUN conda install python=3.7 -y && conda clean -a -y
 
 USER ${NB_USER}
 
